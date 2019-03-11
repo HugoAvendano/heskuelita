@@ -9,26 +9,29 @@ public class SecurityServiceImpl implements ISecurityService {
 
     private IUserDao userDao;
 
+
     public SecurityServiceImpl(IUserDao userDao){
         super();
         this.userDao = userDao;
     }
 
-    /*
+
     @Override
-    public void login(User user) throws SecurityException {
+    public User login(User user) throws SecurityException {
+        User userLogin;
         try {
-            user = userDao.login(user.getEmail(),user.getPassword());
+            userLogin = userDao.login(user.getEmail(),user.getPassword());
             System.out.println("Nombre de usuario: " + user.getName());
             System.out.println("Apellido de Usuario: "+ user.getLastname());
             System.out.println("Email: "+ user.getEmail());
         }catch (Exception e){
             throw new SecurityException(e);
         }
-
+        return userLogin;
     }
-    */
 
+
+    /*
     @Override
     public User login(String user, String password) throws SecurityException {
         User u;
@@ -40,4 +43,5 @@ public class SecurityServiceImpl implements ISecurityService {
             throw new SecurityException(e);
         }
     }
+    */
 }

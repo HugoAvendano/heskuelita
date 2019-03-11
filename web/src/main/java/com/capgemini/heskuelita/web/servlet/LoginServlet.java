@@ -44,19 +44,19 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        /*User user = new User();
+        User user = new User();
         user.setEmail(req.getParameter("ctrlName"));
         user.setPassword(req.getParameter("ctrlPassword"));
-        */
 
 
+        /*
         String username = req.getParameter("ctrlName");
-        String password = req.getParameter("ctrlPassword");
+        String password = req.getParameter("ctrlPassword");*/
         try {
             /* se realiza la verificacion del login */
-            //this.securityService.login(user);
+            user=this.securityService.login(user);
 
-            User user= this.securityService.login(username,password);
+            //User user= this.securityService.login(username,password);
             /* Se crea una session y se le setea como atributo un usuario*/
             HttpSession session =  req.getSession();
             session.setAttribute("user",user);
