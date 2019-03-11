@@ -19,7 +19,7 @@ public class AppContextListener implements ServletContextListener {
         super ();
     }
 
-
+	@Override
     public void contextInitialized (ServletContextEvent servletContextEvent) {
 
 
@@ -34,6 +34,7 @@ public class AppContextListener implements ServletContextListener {
     	ctx.setAttribute ("db", dbManager);
     }
 
+    @Override
     public void contextDestroyed (ServletContextEvent servletContextEvent) {
 
     	ServletContext ctx = servletContextEvent.getServletContext ();

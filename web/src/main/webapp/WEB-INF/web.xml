@@ -12,12 +12,12 @@
 
     <context-param>
         <param-name>DBPWD</param-name>
-        <param-value>dcd16cP_</param-value>
+        <param-value>hugo0412</param-value>
     </context-param>
 
     <context-param>
         <param-name>DBURL</param-name>
-        <param-value>jdbc:postgresql://localhost:5432/heskuelita</param-value>
+        <param-value>jdbc:postgresql://localhost:5432/postgres</param-value>
     </context-param>
 
     <context-param>
