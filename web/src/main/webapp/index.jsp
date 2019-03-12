@@ -47,7 +47,7 @@
 					</form>
 				</div>
 				<div class="wrapper">
-					<a href="SignUp-form.html">
+					<a href="signUp.jsp">
 							<h3>Create Account</h3>
 					</a>
 				</div>

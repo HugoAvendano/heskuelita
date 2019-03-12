@@ -1,5 +1,6 @@
 package com.capgemini.heskuelita.service.impl;
 
+import com.capgemini.heskuelita.core.beans.Student;
 import com.capgemini.heskuelita.core.beans.User;
 import com.capgemini.heskuelita.data.IUserDao;
 import com.capgemini.heskuelita.service.ISecurityService;
@@ -30,18 +31,12 @@ public class SecurityServiceImpl implements ISecurityService {
         return userLogin;
     }
 
-
-    /*
     @Override
-    public User login(String user, String password) throws SecurityException {
-        User u;
-        try {
-            System.out.println("userName:" + user + " password: " +password );
-            u = userDao.login(user,password);
-            return u;
+    public void signUp(Student student) throws SecurityException {
+        try{
+            this.userDao.signUp(student);
         }catch (Exception e){
             throw new SecurityException(e);
         }
     }
-    */
 }

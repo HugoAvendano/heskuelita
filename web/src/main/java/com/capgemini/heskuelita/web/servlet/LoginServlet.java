@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         /* Obtengo la configuracion de la app */
         ServletContext context = config.getServletContext();
 
-        /*Obtengo la conexion a la base de datos */
+        /*Obtengo la configuracion de la conexion a la base de datos */
 
         DBConnectionManager  manager = (DBConnectionManager) context.getAttribute("db");
 
@@ -49,15 +49,10 @@ public class LoginServlet extends HttpServlet {
         user.setPassword(req.getParameter("ctrlPassword"));
 
 
-        /*
-        String username = req.getParameter("ctrlName");
-        String password = req.getParameter("ctrlPassword");*/
         try {
             /* se realiza la verificacion del login */
             user=this.securityService.login(user);
-
-            //User user= this.securityService.login(username,password);
-            /* Se crea una session y se le setea como atributo un usuario*/
+            /* Se obtiene un sesion , en que caso que no exita se crea,  y se le setea como atributo un usuario*/
             HttpSession session =  req.getSession();
             session.setAttribute("user",user);
             resp.sendRedirect("home.jsp");
