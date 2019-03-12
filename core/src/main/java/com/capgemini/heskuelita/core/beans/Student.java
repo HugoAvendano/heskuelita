@@ -10,7 +10,6 @@ public class Student {
     private LocalDate birthdate;
     private String docType;
     private long identification;
-    private String phone;
     private String gender;
     private User user;
 
@@ -18,14 +17,13 @@ public class Student {
 
     }
 
-    public Student(int id, String name, String lastname, LocalDate birthdate, String docType,long identifiaction ,String phone, String gender, User user) {
+    public Student(int id, String name, String lastname, LocalDate birthdate, String docType,long identifiaction , String gender, User user) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
         this.docType = docType;
         this.identification = identifiaction;
-        this.phone = phone;
         this.gender = gender;
         this.user = user;
     }
@@ -76,16 +74,6 @@ public class Student {
 
     public long getIdentification() {
         return identification;
-    }
-
-
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getGender() {

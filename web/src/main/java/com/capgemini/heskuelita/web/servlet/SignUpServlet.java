@@ -21,8 +21,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
+import org.apache.log4j.Logger;
+
 @WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
+
+    private Logger logger= Logger.getLogger(SignUpServlet.class);
 
     private ISecurityService securityService;
 
@@ -55,7 +59,6 @@ public class SignUpServlet extends HttpServlet {
         student.setBirthdate(LocalDate.parse(req.getParameter("ctrlBirthdate"),formatter));
         student.setDocType(req.getParameter("ctrlDocType"));
         student.setIdentification(Long.parseLong(req.getParameter("ctrlIdentification")));
-        student.setPhone(req.getParameter("ctrlPhone"));
         student.setGender(req.getParameter("ctrlGender"));
 
         User userStudent= new User();
@@ -65,10 +68,27 @@ public class SignUpServlet extends HttpServlet {
         userStudent.setSecAnswer(req.getParameter("ctrlAnswer"));
         student.setUser(userStudent);
 
+        logger.debug("Inicio del proceso de sign up...");
+        logger.info("Datos del usuario a registrar");
+
+        logger.info("Nombre de usuario: " + student.getName());
+        logger.info("Lastanem de usuario: " + student.getLastname());
+        logger.info("Fecha de nacimiento del usuario: " + student.getBirthdate().toString());
+        logger.info("Tipo de documento del usuario: " + student.getDocType());
+        logger.info("Nro de documento del usuario: "+ student.getIdentification());
+        logger.info("Sexo del usuario: " + student.getGender());
+        logger.info("Email del usuario: " + student.getUser().getEmail());
+        logger.info("Password del usuario: " + student.getUser().getPassword());
+        logger.info("Pregunta de seguridad  del usuario: " + student.getUser().getSecQuestion());
+        logger.info("Respuesta de seguridad  del usuario: " + student.getUser().getSecAnswer());
+
+
+
         try{
             /*Se realiza la verificacion del registo de un nuevo estudiante  */
             this.securityService.signUp(student);
         }catch (Exception e){
+            logger.error("Error en proceso de sign up!!!");
             e.printStackTrace();
         }
 

@@ -61,13 +61,6 @@
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="phone"> Phone: </label>
-				<div class="col-sm-8">
-					<input type="tel" class="form-control" name="ctrlPhone" id="phone">
-				</div>
-			</div>
-
-			<div class="form-group">
 				<label class="control-label col-sm-2" for="gender"> Gender: </label>
 				<div class="col-sm-8">
 					<label class=" radio-inline col-sm-2">
@@ -109,11 +102,11 @@
 			<div class="form-group">
   					<label  class="control-label col-sm-2" for="question">Security Question:</label>
 					<div class="col-sm-8">
-						<select class="form-control " id="question">
+						<select class="form-control" name="ctrlQuestion" id="question">
 	    					<option value="0">Select a question</option>
-	    					<option value="What was the name of your first pet?" name="ctrlQuestion">What was the name of your first pet?</option>
-	    					<option value="Which is your favorite color?" name="ctrlQuestion">Which is your favorite color?</option>
-	    					<option value="What is your favorite book?" name="ctrlQuestion">What is your favorite book?</option>
+	    					<option value="What was the name of your first pet?" >What was the name of your first pet?</option>
+	    					<option value="Which is your favorite color?" >Which is your favorite color?</option>
+	    					<option value="What is your favorite book?" >What is your favorite book?</option>
   						</select>
 					</div>
 			</div>
