@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
             /* Se inicializa el servicio de seguridad del login con un una coneccion a la bd  */
             this.securityService = new SecurityServiceImpl(new UserDaoJDBC(manager.getConnection()));
         }catch (Exception e){
+            e.printStackTrace();
             throw new ServletException(e);
         }
 

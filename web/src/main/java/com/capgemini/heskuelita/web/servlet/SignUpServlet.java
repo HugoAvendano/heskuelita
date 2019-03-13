@@ -40,12 +40,13 @@ public class SignUpServlet extends HttpServlet {
         ServletContext context = config.getServletContext();
 
         /* Obtengo la configuracion de la conexion a la base de datos */
-        DBConnectionManager manager= (DBConnectionManager) context.getAttribute("bd");
+        DBConnectionManager manager= (DBConnectionManager) context.getAttribute("db");
 
        try {
             this.securityService = new SecurityServiceImpl(new UserDaoJDBC(manager.getConnection()));
         }catch (Exception e){
-           // throw new ServletException(e);
+           e.printStackTrace();
+           throw new ServletException(e);
         }
     }
 

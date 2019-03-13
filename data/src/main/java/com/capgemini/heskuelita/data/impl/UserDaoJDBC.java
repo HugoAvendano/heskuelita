@@ -71,13 +71,13 @@ public class UserDaoJDBC implements IUserDao {
 
 
             PreparedStatement pstmStudent = this.conn.prepareStatement ("INSERT INTO student VALUES (default, ?, ?, ?, ?, ?, ?, ?)");
-            pstmStudent.setString(2,student.getName());
-            pstmStudent.setString(3,student.getLastname());
-            pstmStudent.setString(4,student.getBirthdate().toString());
-            pstmStudent.setString(5, student.getDocType());
-            pstmStudent.setLong(6,student.getIdentification());
-            pstmStudent.setString(7,student.getUser().getEmail());
-            pstmStudent.setString(8,student.getGender());
+            pstmStudent.setString(1,student.getName());
+            pstmStudent.setString(2,student.getLastname());
+            pstmStudent.setObject(3,student.getBirthdate());
+            pstmStudent.setString(4, student.getDocType());
+            pstmStudent.setLong(5,student.getIdentification());
+            pstmStudent.setString(6,student.getUser().getEmail());
+            pstmStudent.setString(7,student.getGender());
 
             int p= pstmStudent.executeUpdate();
             System.out.println("Se registro el estudiante: " + r);
