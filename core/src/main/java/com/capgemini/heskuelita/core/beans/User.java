@@ -1,8 +1,7 @@
 package com.capgemini.heskuelita.core.beans;
 
 import lombok.*;
-
-import java.time.LocalDate;
+import javax.persistence.*;
 
 
 
@@ -10,52 +9,43 @@ import java.time.LocalDate;
 //@Data
 /*GENERA EL CONSTRUCTOR SIN ARGMUMENTOS*/
 //@NoArgsConstructor
+
+@Entity
+@Table (name = "User")
 public class User {
 
-    private String name;
-
-    private String lastname;
-
+    @Id
+    @Column(name = "user_email", length = 48, nullable = false)
     private String email;
 
+
+    @Column (name = "user_password", length = 12, nullable = false)
     private String password;
 
-
+    @Column (name = "user_secQuestion", length = 48, nullable = false)
     private String secQuestion;
 
+    @Column (name = "user_secQuestion", length = 60, nullable = false)
     private String secAnswer;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Student student;
 
 
     public User() {
 
     }
 
-    public User(String name,String lastname, String email, String password, String secQuestion, String secAnswer) {
+    public User( String email, String password, String secQuestion, String secAnswer, Student student) {
 
-        this.name = name;
-        this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.secQuestion = secQuestion;
         this.secAnswer = secAnswer;
+        this.student = student;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public String getEmail() {
         return email;
@@ -87,5 +77,13 @@ public class User {
 
     public void setSecAnswer(String secAnswer) {
         this.secAnswer = secAnswer;
+    }
+
+    public Student getStudent(){
+        return student;
+    }
+
+    public void setStudent(Student student){
+        this.student=student;
     }
 }

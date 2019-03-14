@@ -2,52 +2,53 @@
 package com.capgemini.heskuelita.data.db;
 
 
-import java.sql.Connection;
+import java.util.Properties;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 
 import com.capgemini.heskuelita.data.DataException;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import javax.imageio.spi.ServiceRegistry;
 
 
 public class DBConnectionManager {
 
-
-	private String dbURL;
-	private String user;
-	private String password;
-	private String driver;
-
-    private BasicDataSource dataSource;
+	private static SessionFactory;
 
 
-	public DBConnectionManager (String url, String u, String p, String d) {
 
-	    super ();
-		this.dbURL = url;
-		this.user  = u;
-		this.password = p;
-		this.driver   = d;
-
-		this.setup ();
+	private DBConnectionManager () {
+		super();
 	}
 
 
-    private void setup ()  {
+	private SessionFactory buildSessionFactory(){
+		try {
+		/* Declaro una variable configuration para leer el archivo de configuracion
+		 de hibernate para obtener los datos necesarios de la coneccion a BD*/
+			Configuration configuration = new Configuration();
+			configuration.configure("hibernate.cfg.xml");
 
-        // Create a new Datasource.
-        this.dataSource = new BasicDataSource ();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySetting(configuration.getProperties()).build();
 
-        this.dataSource.setUrl (this.dbURL);
-        this.dataSource.setUsername (this.user);
-        this.dataSource.setPassword (this.password);
-        this.dataSource.setMinIdle (50);
-        this.dataSource.setMaxIdle (100);
-        this.dataSource.setMaxOpenPreparedStatements (1000);
-        this.dataSource.setDriverClassName (this.driver);
-    }
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
-	
-	public Connection getConnection () {
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			throw new DataException(e);
+
+		}
+
+
+	}
+
+
+
+
+
+	public SessionFactory getConnection () {
 
 	    try {
 

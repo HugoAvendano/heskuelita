@@ -86,8 +86,9 @@ public class SignUpServlet extends HttpServlet {
 
 
         try{
-            /*Se realiza la verificacion del registo de un nuevo estudiante  */
+            /*Se realiza verificacion del registo de un nuevo estudiante  */
             this.securityService.signUp(student);
+            logger.debug("Serrvicio de registro de estudiante finalizado con exito!!!");
         }catch (Exception e){
             logger.error("Error en proceso de sign up!!!");
             e.printStackTrace();

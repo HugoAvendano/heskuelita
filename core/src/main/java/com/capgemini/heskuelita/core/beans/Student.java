@@ -2,16 +2,38 @@ package com.capgemini.heskuelita.core.beans;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "Student")
 public class Student {
 
+    @Id
+    @Column(name = "stu_id")
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="seq_stud")
+    @SequenceGenerator(name="seq_stud", sequenceName="seq_stud")
+
     private int id;
+
+    @Column(name = "stu_name" , nullable = false)
     private String name;
+
+    @Column(name = "stu_lastname", nullable = false)
     private String lastname;
+
+    @Column(name = "stud_birthdate" , nullable = false)
     private LocalDate birthdate;
+
+    @Column(name = "stu_docType", nullable = false)
     private String docType;
+
+
+    @Column(name = "stu_identification", nullable = false)
     private long identification;
+
+    @Column(name = "stu_gender", nullable = false)
     private String gender;
-    private User user;
+
 
     public Student() {
 
@@ -25,7 +47,6 @@ public class Student {
         this.docType = docType;
         this.identification = identifiaction;
         this.gender = gender;
-        this.user = user;
     }
 
     public int getId() {
@@ -84,11 +105,4 @@ public class Student {
         this.gender = gender;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
