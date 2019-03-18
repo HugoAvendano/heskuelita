@@ -1,4 +1,4 @@
-<%@ page import="com.capgemini.heskuelita.core.beans.User" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.capgemini.heskuelita.core.beans.Student" contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,18 +7,22 @@
     </head>
     <body>
 
-        <%User us = (User)session.getAttribute ("user");%>
+        <% Student st = (Student)session.getAttribute ("student");%>
 
 		<div>
 			<span>Bienvenido:</span>
-			<span><%= us.getName()%><span>
-			<span><%= us.getLastname()%><span>
-
+			<span><%= st.getName()%><span>
+			<span><%= st.getLastname()%><span>
 		</div>
 		<div>
 			<span> Email: </span>
-			<span><%= us.getEmail()%> </span>
+			<span><%= st.getUser().getEmail()%> </span>
 		</div>
+		</div>
+			<a href="editProfile.jsp" class="btn btn-success">
+				Editat Perfil
+			</a>
+		<div>
 
     </body>
 </html>

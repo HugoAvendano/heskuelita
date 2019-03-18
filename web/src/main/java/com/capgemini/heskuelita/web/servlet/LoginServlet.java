@@ -1,8 +1,9 @@
 package com.capgemini.heskuelita.web.servlet;
 
 import com.capgemini.heskuelita.core.beans.User;
+import com.capgemini.heskuelita.core.beans.Student;
 import com.capgemini.heskuelita.data.db.DBConnectionManager;
-import com.capgemini.heskuelita.data.impl.UserDaoJDBC;
+import com.capgemini.heskuelita.data.impl.UserDao;
 import com.capgemini.heskuelita.service.ISecurityService;
 import com.capgemini.heskuelita.service.impl.SecurityServiceImpl;
 
@@ -33,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             /* Se inicializa el servicio de seguridad del login con un una coneccion a la bd  */
-            this.securityService = new SecurityServiceImpl(new UserDaoJDBC(manager.getConnection()));
+            this.securityService = new SecurityServiceImpl(new UserDao(manager.getSessionFactory()));
         }catch (Exception e){
             e.printStackTrace();
             throw new ServletException(e);
@@ -52,10 +53,10 @@ public class LoginServlet extends HttpServlet {
 
         try {
             /* se realiza la verificacion del login */
-            user=this.securityService.login(user);
+            Student student = this.securityService.login(user);
             /* Se obtiene un sesion , en que caso que no exita se crea,  y se le setea como atributo un usuario*/
             HttpSession session =  req.getSession();
-            session.setAttribute("user",user);
+            session.setAttribute("student",student);
             resp.sendRedirect("home.jsp");
         } catch (Exception e) {
            e.printStackTrace();

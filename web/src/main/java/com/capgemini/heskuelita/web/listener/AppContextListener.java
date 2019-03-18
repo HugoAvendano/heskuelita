@@ -21,24 +21,15 @@ public class AppContextListener implements ServletContextListener {
 
 	@Override
     public void contextInitialized (ServletContextEvent servletContextEvent) {
-
-
-    	ServletContext ctx = servletContextEvent.getServletContext ();
-    	
-    	String url = ctx.getInitParameter ("DBURL");
-    	String u   = ctx.getInitParameter ("DBUSER");
-    	String p   = ctx.getInitParameter ("DBPWD");
-        String d   = ctx.getInitParameter ("DRIVER");
-
-    	DBConnectionManager dbManager = new DBConnectionManager (url, u, p, d);
+		ServletContext ctx = servletContextEvent.getServletContext ();
+    	DBConnectionManager dbManager = new DBConnectionManager ();
     	ctx.setAttribute ("db", dbManager);
     }
 
     @Override
     public void contextDestroyed (ServletContextEvent servletContextEvent) {
-
     	ServletContext ctx = servletContextEvent.getServletContext ();
     	DBConnectionManager dbManager = (DBConnectionManager) ctx.getAttribute ("db");
-    	dbManager.closeConnection ();
+    	dbManager.closeSessionFactory ();
     }
 }

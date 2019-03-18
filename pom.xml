@@ -31,14 +31,12 @@
     </modules>
 
     <dependencies>
-
-        <dependency>
+		<dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
 
 
         <dependency>
@@ -62,10 +60,17 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
+		   <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>5.0.0.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>5.0.0.Final</version>
             <scope>compile</scope>
         </dependency>
 

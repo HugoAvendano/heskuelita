@@ -5,45 +5,45 @@ import javax.persistence.*;
 
 
 
-/*GENERA GETTERS, SETTERS, CONSTRUCTOR CON TODOS LO ARGUMENTOS, HASHCODE, EQUALS*/
+//GENERA GETTERS, SETTERS, CONSTRUCTOR CON TODOS LO ARGUMENTOS, HASHCODE, EQUALS*/
 //@Data
-/*GENERA EL CONSTRUCTOR SIN ARGMUMENTOS*/
-//@NoArgsConstructor
+//GENERA EL CONSTRUCTOR SIN ARGMUMENTOS
+//@NoArgsConstructor*/
 
-@Entity
-@Table (name = "User")
+@Entity	(name="User")
+@Table (name = "users")
 public class User {
 
     @Id
-    @Column(name = "user_email", length = 48, nullable = false)
+    @Column(name = "id_user", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="seq_users")
+    @SequenceGenerator(name="seq_users", sequenceName="seq_users")
+    private int id_user;
+    
+    @Column (name = "email", length = 48, nullable = false)
     private String email;
 
 
-    @Column (name = "user_password", length = 12, nullable = false)
+    @Column (name = "password", length = 12, nullable = false)
     private String password;
 
-    @Column (name = "user_secQuestion", length = 48, nullable = false)
+    @Column (name = "question", length = 48, nullable = false)
     private String secQuestion;
 
-    @Column (name = "user_secQuestion", length = 60, nullable = false)
+    @Column (name = "answer", length = 60, nullable = false)
     private String secAnswer;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Student student;
-
 
     public User() {
 
     }
-
-    public User( String email, String password, String secQuestion, String secAnswer, Student student) {
-
+    
+    
+    public User(int id_user, String email, String password, String secQuestion, String secAnswer){
+    	this.id_user = id_user;
         this.email = email;
         this.password = password;
         this.secQuestion = secQuestion;
         this.secAnswer = secAnswer;
-        this.student = student;
     }
 
 
@@ -79,11 +79,4 @@ public class User {
         this.secAnswer = secAnswer;
     }
 
-    public Student getStudent(){
-        return student;
-    }
-
-    public void setStudent(Student student){
-        this.student=student;
-    }
 }

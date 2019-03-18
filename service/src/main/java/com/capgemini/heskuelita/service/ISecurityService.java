@@ -1,12 +1,13 @@
 package com.capgemini.heskuelita.service;
 
-import com.capgemini.heskuelita.core.beans.User;
 import com.capgemini.heskuelita.core.beans.Student;
+import com.capgemini.heskuelita.core.beans.User;
+
 
 
 
 public interface ISecurityService {
-    User login (User user) throws SecurityException;
+    Student login (User user) throws SecurityException;
     void signUp ( Student student ) throws SecurityException;
 }
 
