@@ -1,5 +1,6 @@
 package com.capgemini.heskuelita.core.beans;
 
+
 import java.time.LocalDate;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ public class Student {
     @Column(name = "id_student")
     @GeneratedValue(strategy = GenerationType.AUTO,generator="seq_student")
     @SequenceGenerator(name="seq_student", sequenceName="seq_student")
-
     private int id;
 
     @Column(name = "name" , nullable = false)
@@ -22,9 +22,10 @@ public class Student {
     private String lastname;
     
     /*
-   @Column(name = "birthdate" , nullable = true )
-   private LocalDate birthdate;
+    @Column(name = "birthdate" , nullable = true)
+    private LocalDate birthdate;
 	*/
+    
     @Column(name = "documentation_type", nullable = false)
     private String docType;
 
@@ -86,7 +87,7 @@ public class Student {
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
-*/
+	*/
     public String getDocType() {
         return docType;
     }
@@ -120,6 +121,18 @@ public class Student {
     public void setUser(User user) {
 		this.user = user;
 	}
-  
+
+
+	@Override
+	public String toString() {
+		return "id_student= " + id + ", name=" + name + ", lastname=" + lastname 
+				+ ", docType=" + docType + ", identification=" + identification
+				+ ", gender=" + gender + ", user="
+				+ user;
+	}
     
+    
+
 }
+
+    

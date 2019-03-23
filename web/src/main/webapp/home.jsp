@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="US-ASCII">
-        <title>Login Page</title>
+        <title>Home</title>
     </head>
     <body>
 
@@ -20,8 +20,12 @@
 		</div>
 		</div>
 			<a href="editProfile.jsp" class="btn btn-success">
-				Editat Perfil
+				Editar Perfil
 			</a>
+			<a href="deleteProfile.jsp" class="btn btn-success">
+				Eliminar Perfil
+			</a>
+			
 		<div>
 
     </body>

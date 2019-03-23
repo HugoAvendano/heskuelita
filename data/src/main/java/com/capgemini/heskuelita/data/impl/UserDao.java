@@ -35,20 +35,18 @@ public class UserDao implements IUserDao {
             session =  sessionFactory.openSession();
 
             logger.info("Configuro la query a realizar");
-            Query query = session.createQuery("from Student where id_student=:id");
-            query.setParameter("id",1);
-            //query.setParameter("password",password);
+            Query query = session.createQuery("from Student as st where st.user.email =:email and st.user.password =:password");
+            query.setParameter("email",userName);
+            query.setParameter("password",password);
             logger.info("Ejecuto la query");
            
             student=(Student)query.uniqueResult();
             logger.debug("Query ejecutada");
 
         } catch (Exception e) {
-            logger.error("Error durante el proceso de ejecucion de la consulta");
+            logger.error("Error durante el proceso de login");
             e.printStackTrace();
             throw new DataException (e);
-        }finally {
-            session.close();
         }
 
         if (student == null) {
@@ -56,7 +54,8 @@ public class UserDao implements IUserDao {
             throw new DataException ("Usuario " + userName + " desconocido");
 
         }
-        logger.debug("Consulta resultada exitosamente con resultado");
+        logger.debug("Proceso de login realizado con exito");
+        logger.info(student);
         return student;
     }
 
@@ -75,9 +74,55 @@ public class UserDao implements IUserDao {
         	session.save(student);
         	transaction.commit();
         }catch(Exception e){
-                throw new DataException (e);
+        	logger.error("Error durante el proceso de registro del estudiante");
+            e.printStackTrace();
+            throw new DataException (e);    
+        
         }
-       }
+        logger.debug("Proceso de registro de estudiante realizado con exito");
+    }
+
+	@Override
+	public void editProfile(Student student) {
+		
+		Session session = null;
+		Transaction transaction = null;
+		
+		try {
+			logger.info("Obtengo la session");
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(student);
+			transaction.commit();
+			
+		}catch (Exception e) {
+			logger.error("Error durante el proceso de actualizacion de datos del estudiante");
+            e.printStackTrace();
+            throw new DataException (e);
+		}
+	}
+
+	@Override
+	public void deleteProfile(Student student) {
+		Session session= null;
+		Transaction transaction= null;
+		
+		try {
+			logger.info("Obtengo la session");
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.delete(student);
+			transaction.commit();
+		} catch (Exception e) {
+			logger.error("Error durante el proceso de eliminacion del perfil del estudiante");
+			e.printStackTrace();
+			throw new DataException(e);
+		}
+		
+	} 
+	
+	
+    
 }
 
 

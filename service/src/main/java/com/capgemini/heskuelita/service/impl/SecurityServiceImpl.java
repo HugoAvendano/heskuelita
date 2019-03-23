@@ -38,23 +38,44 @@ public class SecurityServiceImpl implements ISecurityService {
         try{
             logger.debug("Inicio del Servicio de Sign Up");
             logger.info("Datos del usuario a registrar");
-
-            logger.info("Nombre de usuario: " + student.getName());
-            logger.info("Lastanem de usuario: " + student.getLastname());
-            //logger.info("Fecha de nacimiento del usuario: " + student.getBirthdate().toString());
-            logger.info("Tipo de documento del usuario: " + student.getDocType());
-            logger.info("Nro de documento del usuario: "+ student.getIdentification());
-            logger.info("Sexo del usuario: " + student.getGender());
-            //logger.info("Email del usuario: " + student.getUser().getEmail());
-            //logger.info("Password del usuario: " + student.getUser().getPassword());
-            //logger.info("Pregunta de seguridad  del usuario: " + student.getUser().getSecQuestion());
-            //logger.info("Respuesta de seguridad  del usuario: " + student.getUser().getSecAnswer());
-            
-            
+            logger.info(student);        
             this.userDao.signUp(student);
         }catch (Exception e){
             logger.error("Error en el servicio de sign up");
             throw new SecurityException(e);
         }
     }
+
+
+	@Override
+	public void editProfile(Student student) throws SecurityException {
+		try {
+			logger.debug("Inicio del Servicio de EditProfile");
+			logger.info("Datos del usuario a editar");
+			logger.info(student);
+			this.userDao.editProfile(student);
+		} catch (Exception e) {
+			logger.error("Error en el servicio de Edit Profile");
+			throw new SecurityException(e);
+		}
+		
+	}
+
+
+	@Override
+	public void deleteProfile(Student student) throws SecurityException {
+		try {
+			logger.debug("Inicio del Servicio de DeleteProfile");
+			logger.info("Datos del ususario a eliminar");
+			logger.info(student);
+			this.userDao.deleteProfile(student);
+		}catch (Exception e) {
+			logger.error("Error en el servicio de Delete Profile");
+		}
+		
+	}
+    
+	
+    
+    
 }

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="US-ASCII">
-    	<title></title>
+    	<title>Edit Profile</title>
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,7 @@
 	<% Student st = (Student)session.getAttribute("student"); %>
 	<div class="container">
 		<h2>EDIT PROFILE</h2>
-		<form class="form-horizontal" action="signUp" method="post">
+		<form class="form-horizontal" action="editProfile" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="name"> Name: </label>
 				<div class="col-sm-8">
@@ -57,7 +57,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="identification"> Identification: </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="ctrlIdentification" id="identification" value = <%=st.getLastname() %>>
+					<input type="text" class="form-control" name="ctrlIdentification" id="identification" value = <%=st.getIdentification() %>>
 				</div>
 			</div>
 

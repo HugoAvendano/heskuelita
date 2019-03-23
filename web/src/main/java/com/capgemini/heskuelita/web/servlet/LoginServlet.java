@@ -13,11 +13,14 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import org.apache.log4j.Logger;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
-    private ISecurityService securityService;
+	
+	private Logger logger= Logger.getLogger(LoginServlet.class);
+    
+	private ISecurityService securityService;
 
     public LoginServlet() {
         super();
@@ -49,7 +52,9 @@ public class LoginServlet extends HttpServlet {
         User user = new User();
         user.setEmail(req.getParameter("ctrlName"));
         user.setPassword(req.getParameter("ctrlPassword"));
-
+        logger.debug("Inicio del proceso de Login...");
+        logger.info("Datos del usuario a loguear");
+        logger.info("Email: " + user.getEmail() + " Password: "+ user.getPassword());
 
         try {
             /* se realiza la verificacion del login */
@@ -58,6 +63,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session =  req.getSession();
             session.setAttribute("student",student);
             resp.sendRedirect("home.jsp");
+            logger.debug("Servicio de login de estudiante finalizado con exito!!!");
         } catch (Exception e) {
            e.printStackTrace();
            resp.sendRedirect("error.jsp");

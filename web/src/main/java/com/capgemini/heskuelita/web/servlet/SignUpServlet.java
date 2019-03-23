@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 import org.apache.log4j.Logger;
 
 @WebServlet("/signUp")
@@ -56,8 +55,7 @@ public class SignUpServlet extends HttpServlet {
         Student student= new Student();
         student.setName(req.getParameter("ctrlName"));
         student.setLastname(req.getParameter("ctrlLastname"));
-        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //student.setBirthdate(LocalDate.parse(req.getParameter("ctrlBirthdate"),formatter));
+        //student.setBirthdate(LocalDate.parse(req.getParameter("ctrlBirthdate")));
         student.setDocType(req.getParameter("ctrlDocType"));
         student.setIdentification(Long.parseLong(req.getParameter("ctrlIdentification")));
         student.setGender(req.getParameter("ctrlGender"));
@@ -72,24 +70,13 @@ public class SignUpServlet extends HttpServlet {
 
         logger.debug("Inicio del proceso de sign up...");
         logger.info("Datos del usuario a registrar");
-
-        logger.info("Nombre de usuario: " + student.getName());
-        logger.info("Lastanem de usuario: " + student.getLastname());
-       // logger.info("Fecha de nacimiento del usuario: " + student.getBirthdate().toString());
-        logger.info("Tipo de documento del usuario: " + student.getDocType());
-        logger.info("Nro de documento del usuario: "+ student.getIdentification());
-        logger.info("Sexo del usuario: " + student.getGender());
-        //logger.info("Email del usuario: " + student.getUser().getEmail());
-        //logger.info("Password del usuario: " + student.getUser().getPassword());
-        //logger.info("Pregunta de seguridad  del usuario: " + student.getUser().getSecQuestion());
-        //logger.info("Respuesta de seguridad  del usuario: " + student.getUser().getSecAnswer());
-
-
+        logger.info(student);
 
         try{
             /*Se realiza verificacion del registo de un nuevo estudiante  */
             this.securityService.signUp(student);
-            logger.debug("Serrvicio de registro de estudiante finalizado con exito!!!");
+            logger.debug("Servicio de registro de estudiante finalizado con exito!!!");
+            resp.sendRedirect("index.jsp");
         }catch (Exception e){
             logger.error("Error en proceso de sign up!!!");
             e.printStackTrace();

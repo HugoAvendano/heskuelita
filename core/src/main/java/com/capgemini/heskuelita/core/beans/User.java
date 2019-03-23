@@ -1,6 +1,5 @@
-package com.capgemini.heskuelita.core.beans;
+	package com.capgemini.heskuelita.core.beans;
 
-import lombok.*;
 import javax.persistence.*;
 
 
@@ -79,4 +78,13 @@ public class User {
         this.secAnswer = secAnswer;
     }
 
+
+	@Override
+	public String toString() {
+		return "id_user=" + id_user + ", email=" + email + ", password=" + password + ", secQuestion="
+				+ secQuestion + ", secAnswer=" + secAnswer;
+	}
+    
+    
+    
 }

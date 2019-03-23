@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
+import org.apache.log4j.Logger;
 
 import com.capgemini.heskuelita.core.beans.Student;
+
 import com.capgemini.heskuelita.data.db.DBConnectionManager;
 import com.capgemini.heskuelita.data.impl.UserDao;
 import com.capgemini.heskuelita.service.ISecurityService;
@@ -20,6 +21,8 @@ import com.capgemini.heskuelita.service.impl.SecurityServiceImpl;
 
 @WebServlet("/editProfile")
 public class EditProfileServlet extends HttpServlet {
+	
+	private Logger logger = Logger.getLogger(EditProfileServlet.class);
 	
 	private ISecurityService securityService;
 	
@@ -48,22 +51,31 @@ public class EditProfileServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Student st =(Student) req.getSession().getAttribute("student");
-		
+		Student student =(Student) req.getSession().getAttribute("student");
+			
 		//Actualizo los datos del estudiante
-		st.setName(req.getParameter("ctrlName"));
-		st.setLastname(req.getParameter("ctrlLastname"));
-		st.setDocType(req.getParameter("ctrlDocType"));
-		st.setIdentification(Long.parseLong(req.getParameter("ctrlIdentifiaction")));
-		
-		
-		
+		student.setName(req.getParameter("ctrlName"));
+	    student.setLastname(req.getParameter("ctrlLastname"));
+		//student.setBirthdate(LocalDate.parse(req.getParameter("ctrlBirthdate")));
+		student.setDocType(req.getParameter("ctrlDocType"));
+		student.setIdentification(Long.parseLong(req.getParameter("ctrlIdentification")));
+		student.setGender(req.getParameter("ctrlGender"));
+		student.getUser().setEmail(req.getParameter("ctrlEmail"));
+		student.getUser().setPassword(req.getParameter("ctrlPassword"));
+		student.getUser().setSecQuestion(req.getParameter("ctrlQuestion"));
+		student.getUser().setSecAnswer(req.getParameter("ctrlAnswer"));
+				
+		logger.debug("Inicio del proceso de Edit Profile...");
+        logger.info("Datos del usuario a modificar");
+        logger.info(student);
+				
+		try {
+			this.securityService.editProfile(student);
+			logger.debug("Servicio de actualizacion de datos del  estudiante finalizado con exito!!!");
+			resp.sendRedirect("index.jsp");
+		} catch (Exception e) {
+			logger.error("Error en el Servicio de actualizacion de datos del estudiante !!!");
+			e.printStackTrace();
+		}
 	}
-
-	
-	
-	
-	
-	
-	
 }
